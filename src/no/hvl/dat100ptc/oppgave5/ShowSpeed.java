@@ -48,7 +48,30 @@ public class ShowSpeed extends EasyGraphics {
 				
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		int xPos = MARGIN;
+		int bredde = 2;
+		
+		double [] hastigheter = gpscomputer.speeds();
+		
+		for (int i = 0; i < hastigheter.length; i++) {
+			if(i%2 == 0) {
+				setColor(0, 0, 255);
+			} else {
+				setColor(0, 150, 255);
+			}
+			
+			int hoeyde = (int)(hastigheter[i]+0.5);
+			if (hoeyde < 0) {
+				hoeyde = 0;
+			}
+			
+			fillRectangle(xPos, ybase-hoeyde*timescaling, bredde, hoeyde*timescaling);
+			xPos+= bredde;
+		}
+		
+		int gjHastighet = (int)(gpscomputer.averageSpeed()+0.5);
+		setColor(0, 255, 0);
+		fillRectangle(MARGIN, ybase-gjHastighet*timescaling, hastigheter.length*bredde, 1);
 	
 		// TODO - SLUTT
 	}
