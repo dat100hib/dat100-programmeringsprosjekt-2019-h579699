@@ -130,7 +130,7 @@ public class GPSUtils {
 		String str;
 
 		// TODO - START
-		str = String.format("%10.2f", Math.round(d*100)/100.0);
+		str = String.format("%" + TEXTWIDTH +"s", Math.round(d*100)/100.0);
 		return str;
 
 		// TODO - SLUTT

@@ -36,7 +36,7 @@ public class ShowSpeed extends EasyGraphics {
 
 		int N = gpspoints.length-1; // number of data points
 		
-		makeWindow("Speed profile", 2*MARGIN + 2 * N, 2 * MARGIN + BARHEIGHT);
+		makeWindow("Speed profile", 2*MARGIN +2 * N, 2 * MARGIN + BARHEIGHT);
 		
 		showSpeedProfile(MARGIN + BARHEIGHT,N);
 	}

@@ -20,9 +20,9 @@ public class GPSDataConverter {
 		
 		// TODO
 		// OPPGAVE - START
-		int hr =  parseInt(timestr.substring(TIME_STARTINDEX, TIME_STARTINDEX+2));
-		int min = parseInt(timestr.substring(TIME_STARTINDEX+3, TIME_STARTINDEX+5));
-		int sec = parseInt(timestr.substring(TIME_STARTINDEX+6, TIME_STARTINDEX+8));
+		int hr =  parseInt(timestr.substring(TIME_STARTINDEX, TIME_STARTINDEX+2));   //Kutter ut den delen av tekststrengen timestr som viser antall timer
+		int min = parseInt(timestr.substring(TIME_STARTINDEX+3, TIME_STARTINDEX+5)); //Tilsvarende for min
+		int sec = parseInt(timestr.substring(TIME_STARTINDEX+6, TIME_STARTINDEX+8)); //Tilsvarende for sec
 		
 		secs = hr*60*60 + min*60 + sec;
 		return secs;

@@ -98,14 +98,30 @@ public class GPSComputer {
 		double average = 0;
 		
 		// TODO - START
-		
 		average = (totalDistance()/totalTime())*3.6;
 		return average;
 		
 		// TODO - SLUTT
 		
 	}
-
+	
+	public double [] climbs() {
+		double [] stigningsprosenter = new double [gpspoints.length-1];
+		
+		for (int i = 0; i < stigningsprosenter.length; i++) {
+			stigningsprosenter[i] = gpspoints[i+1].getElevation() - gpspoints[i].getElevation();
+			
+		}
+		
+		return stigningsprosenter;
+	}	
+	
+	public double maxClimbs() {
+		double maxStigning = GPSUtils.findMax(climbs()); 
+		return maxStigning;
+	}	
+		
+		
 	/*
 	 * bicycling, <10 mph, leisure, to work or for pleasure 4.0 bicycling,
 	 * general 8.0 bicycling, 10-11.9 mph, leisure, slow, light effort 6.0
@@ -171,6 +187,10 @@ public class GPSComputer {
 	}
 	
 	private static double WEIGHT = 80.0;
+	
+	public double getWEIGHT() {
+		return WEIGHT;
+	}
 	
 	public void displayStatistics() {
 
