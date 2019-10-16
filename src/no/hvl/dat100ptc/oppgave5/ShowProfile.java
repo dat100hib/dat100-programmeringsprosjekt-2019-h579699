@@ -52,15 +52,15 @@ public class ShowProfile extends EasyGraphics {
 		int bredde = 3;
 		
 		for (int i = 0; i < gpspoints.length; i++) {
-			if(i%2 == 0) {
+			if(i%2 == 0) {							//Bytter farge på annenhver søyle
 				setColor(0, 0, 255);
 			} else {
 				setColor(0, 150, 255);
 			}
 			
 			int hoeyde = (int)(gpspoints[i].getElevation()+0.5);
-			if (hoeyde < 0) {
-				hoeyde = 0;
+			if (hoeyde < 0) {						
+				hoeyde = 0; //Negative høyder settes til 0
 			}
 			
 			fillRectangle(xPos, ybase-hoeyde, bredde, hoeyde);

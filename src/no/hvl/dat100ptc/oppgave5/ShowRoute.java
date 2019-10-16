@@ -71,11 +71,13 @@ public class ShowRoute extends EasyGraphics {
 		
 		// TODO - START		
 		setColor(0, 255, 0);
+		//Finner minimum breddegrad og lengdegrad
 		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
 		double minlon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
 
 		
-		for (int i = 1; i < gpspoints.length; i++) {		
+		for (int i = 1; i < gpspoints.length; i++) {	
+			//Ganger forskjellen mellom en breddegrad/lengdegrad og minste breddegrad/lengdegrad, med ystep/xstep
 			int x = (int)((gpspoints[i-1].getLongitude()-minlon)*xstep()+0.5)+MARGIN;
 			int y = (int)((gpspoints[i-1].getLatitude()-minlat)*ystep()+0.5)-MARGIN*3;
 			
@@ -83,12 +85,12 @@ public class ShowRoute extends EasyGraphics {
 			int y2 = (int)((gpspoints[i].getLatitude()-minlat)*ystep()+0.5)-MARGIN*3; //Ganget med 3 pga. VM løypen
 			
 			drawLine(x, (ybase-y)/2, x2, (ybase - y2)/2);
-			fillCircle(x, (ybase - y)/2, 2);      //Delt på 2 for å skalere
+			fillCircle(x, (ybase - y)/2, 2);       //Delt på 2 for å skalere
 			
 			if (i == gpspoints.length-1) {         //Sluttpunkt
 				setColor(255, 0, 0);
 				fillCircle(x2, (ybase - y2)/2, 5);
-			} else if (i == 1) {                  //Startpunkt
+			} else if (i == 1) {                   //Startpunkt
 				setColor(0, 0, 255);
 				fillCircle(x, (ybase - y)/2, 5);
 				setColor(0, 255, 0);
@@ -128,14 +130,14 @@ public class ShowRoute extends EasyGraphics {
 		int startX = (int)((gpspoints[0].getLongitude()-minlon)*xstep()+0.5)+MARGIN;
 		int startY = (int)((gpspoints[0].getLatitude()-minlat)*ystep()+0.5)-MARGIN*3;
 		
-		int id = fillCircle(startX, (ybase-startY)/2, 3);
+		int id = fillCircle(startX, (ybase-startY)/2, 3); //Start posisjon for løypen
 				
 		for (int i = 1; i < gpspoints.length; i++) {		
 			int x = (int)((gpspoints[i].getLongitude()-minlon)*xstep()+0.5)+MARGIN;
 			int y = (int)((gpspoints[i].getLatitude()-minlat)*ystep()+0.5)-MARGIN*3;
 			
-			moveCircle(id, x, (ybase-y)/2);
-			pause(50);
+			moveCircle(id, x, (ybase-y)/2); //Flytter sirkelen til neste gpspunkt
+			pause(50); 						//Innlagt pause mellom hvert flytt
 		}
 		
 		

@@ -32,6 +32,8 @@ public class GPSComputer {
 		double distance = 0;
 
 		// TODO - START
+		//Lager en for-løkke for å gjennnomløpe tabellen som inneholder gpspunktene
+		//Finner avstanden mellom to og to gps-punkt og adderer den til totalavstanden
 		for(int i = 1; i < gpspoints.length; i++) {
 			distance += GPSUtils.distance(gpspoints[i-1], gpspoints[i]);
 		}
@@ -46,8 +48,10 @@ public class GPSComputer {
 		double elevation = 0;
 
 		// TODO - START
+		//Adderer forskjellen i høydemetre mellom to og to gpspunkter til totale høydemetre
+		//Men kun hvis høydemetre øker mellom to gpspunkter
 		for(int i = 1; i < gpspoints.length; i++) {
-			if (gpspoints[i-1].getElevation() < gpspoints[i].getElevation()) {
+			if (gpspoints[i-1].getElevation() < gpspoints[i].getElevation()) { 
 				elevation += gpspoints[i].getElevation() - gpspoints[i-1].getElevation();
 			}
 		}
@@ -59,6 +63,7 @@ public class GPSComputer {
 
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {
+		//Finner tidsavstanden mellom siste og første gpspunkt
 		return gpspoints[gpspoints.length-1].getTime() - gpspoints[0].getTime();
 
 	}
@@ -68,9 +73,10 @@ public class GPSComputer {
 	public double[] speeds() {
 		
 		// TODO - START		// OPPGAVE - START
-		
+		//Oppretter en tabell for å ta vare på hastighetene
 		double [] hastigheter = new double [gpspoints.length-1];
 		
+		//Legger til hastigheten mellom to og to gpspunkter, i tabellen
 		for (int i = 0; i < hastigheter.length; i++) {
 			hastigheter[i] = GPSUtils.speed(gpspoints[i], gpspoints[i+1]);
 		}
@@ -98,7 +104,7 @@ public class GPSComputer {
 		double average = 0;
 		
 		// TODO - START
-		average = (totalDistance()/totalTime())*3.6;
+		average = (totalDistance()/totalTime())*3.6; //Ganger med 3.6 for å få km/t
 		return average;
 		
 		// TODO - SLUTT
@@ -109,7 +115,7 @@ public class GPSComputer {
 		double [] stigningsprosenter = new double [gpspoints.length-1];
 		
 		for (int i = 0; i < stigningsprosenter.length; i++) {
-			stigningsprosenter[i] = gpspoints[i+1].getElevation() - gpspoints[i].getElevation();
+			stigningsprosenter[i] = (gpspoints[i+1].getElevation() - gpspoints[i].getElevation())/GPSUtils.distance(gpspoints[i], gpspoints[i-1]);
 			
 		}
 		
@@ -158,7 +164,7 @@ public class GPSComputer {
 			met = 16.0;
 		}
 		
-		kcal = met * weight * secs/3600.0;
+		kcal = met * weight * secs/3600.0; 
 		return kcal;
 
 		// TODO - SLUTT
@@ -169,16 +175,18 @@ public class GPSComputer {
 
 		double totalkcal = 0;
 		
+		// TODO - START	
+		
 		double [] hastigheter = speeds();
 		
-		
+		//Finner kcal mellom to og to gpspunkter, og adderer det til totalkcal
 		for (int i = 0; i < hastigheter.length; i++) {
 			int secs = gpspoints[i+1].getTime() - gpspoints[i].getTime();
 			double kalorier = kcal(WEIGHT, secs, hastigheter[i]);
 			totalkcal+=kalorier;
 		}
 		
-		// TODO - START	
+		
 		
 		return totalkcal;
 

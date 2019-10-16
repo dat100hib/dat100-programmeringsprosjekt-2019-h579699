@@ -55,7 +55,7 @@ public class ShowSpeed extends EasyGraphics {
 		
 		for (int i = 0; i < hastigheter.length; i++) {
 			if(i%2 == 0) {
-				setColor(0, 0, 255);
+				setColor(0, 0, 255);               //Bytter farge på annenhver søyle
 			} else {
 				setColor(0, 150, 255);
 			}
